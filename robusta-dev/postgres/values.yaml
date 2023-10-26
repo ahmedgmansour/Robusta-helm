@@ -163,7 +163,7 @@ ldap:
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
 ##
 persistence:
-  enabled: true
+  enabled: false
   mountPath: /var/lib/postgresql
   subPath: ""
   accessModes:  [ReadWriteOnce]
