@@ -12,7 +12,7 @@ spec:
       - values.yaml  
     repoURL: https://github.com/ahmedgmansour/Robusta-helm.git
     targetRevision: main
-    path: drupal/drupal7/vaules.yaml
+    path: drupal/drupal7/values.yaml
     plugin:
       name: argocd-vault-plugin    
   destination:
