@@ -577,17 +577,17 @@ azure:
 ## Configuration values for the MySQL dependency sub-chart
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/mysql/README.md
 mysql:
-  enabled: true
-  image:
-    tag: 8.0.29-debian-11-r3
+  enabled: false
+  image: 
+    tag: 
   auth:
     rootPassword: ""
     database: wxt
     username: wxt
-    password: ""
+    password: wxt
   primary:
     persistence:
-      enabled: true
+      enabled: false
       # storageClass: managed-premium
       size: 128Gi
     configuration: |-
@@ -632,18 +632,18 @@ mysql:
 ## Configuration values for the PostgreSQL dependency sub-chart
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/README.md
 postgresql:
-  enabled: false
-  image:
-    tag: 14.3.0-debian-11-r3
+  enabled: true
+  image: ahmedgmansour/postgres
+    tag: 
   auth:
     enablePostgresUser: true
     postgresPassword: ""
     username: "wxt"
-    password: ""
+    password: "wxt"
     database: "wxt"
   primary:
     persistence:
-      enabled: true
+      enabled: false
       # storageClass: managed-premium
       size: 128Gi
     configuration: |-
@@ -669,7 +669,7 @@ pgbouncer:
   maxClientConnections: 400
 
 proxysql:
-  enabled: false
+  enabled: true
   admin:
     user: username@hostname
     password: password
@@ -683,11 +683,12 @@ proxysql:
 
 ## Configuration values for the Redis dependency sub-chart
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/redis/README.md
-redis:
-  enabled: false
+redis: 
+  image: ahmedgmansour/redis
+  enabled: true
   replica:
     enabled: false
-    replicaCount: 0
+    replicaCount: 2
     service:
       type: ClusterIP
     disableCommands: []
