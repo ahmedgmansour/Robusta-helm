@@ -19,10 +19,10 @@ drupal:
   ## Drupal image version
   ## ref: https://hub.docker.com/drupalwxt/site-wetkit/tags/
   ##
-  image: drupalwxt/site-wetkit
+  image: ahmedgmansour/drupal
 
   ## Note that by default we use appVersion to get image tag
-  # tag: 4.54
+  tag: ""
 
   ## Optionally specify an array of imagePullSecrets.
   ## Secrets must be manually created in the namespace.
@@ -49,7 +49,7 @@ drupal:
 
   ## Application password
   ##
-  ## password: WetKit2020
+  password: WetKit2020
 
   ## Site configuration
   ##
@@ -410,7 +410,7 @@ azureFile:
 ## Configuration values for the MySQL dependency sub-chart
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/mysql/README.md
 mysql:
-  enabled: true
+  enabled: false
   image:
     tag: 8.0.29-debian-11-r3
   auth:
@@ -465,9 +465,9 @@ mysql:
 ## Configuration values for the PostgreSQL dependency sub-chart
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/README.md
 postgresql:
-  enabled: false
-  image:
-    tag: 14.3.0-debian-11-r3
+  enabled: true
+  image: ahmedgmansour/postgres
+    tag: ""
   auth:
     enablePostgresUser: true
     postgresPassword: ""
@@ -476,7 +476,7 @@ postgresql:
     database: "wxt"
   primary:
     persistence:
-      enabled: true
+      enabled: false
       # storageClass: managed-premium
       size: 128Gi
     configuration: |-
@@ -517,7 +517,8 @@ proxysql:
 ## Configuration values for the Redis dependency sub-chart
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/redis/README.md
 redis:
-  enabled: false
+  image: ahmedgmansour/redis
+  enabled: true
   replica:
     enabled: false
     replicaCount: 0
