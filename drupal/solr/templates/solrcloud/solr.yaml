@@ -1,0 +1,50 @@
+apiVersion: solr.apache.org/v1beta1
+kind: SolrCloud
+metadata:
+  name: {{ include "solr.fullname" . }}
+  labels:
+    {{- include "solr.labels" . | nindent 4 }}
+spec:
+  dataStorage:
+    persistent:
+      reclaimPolicy: Delete
+      pvcTemplate:
+        spec:
+          resources:
+            requests:
+              storage: "{{ .Values.solr.storage.size }}"
+  replicas: {{ .Values.replicas }}
+  solrImage:
+    tag: "{{ default .Chart.AppVersion .Values.solr.tag }}"
+  solrJavaMem: "{{ .Values.solr.solrJavaMem }}"
+  solrSecurity:
+    authenticationType: Basic
+    probesRequireAuth: true
+    basicAuthSecret: {{ .Values.solr.basicAuthSecret }}
+  customSolrKubeOptions:
+    podOptions:
+      livenessProbe:
+        timeoutSeconds: 5
+      readinessProbe:
+        timeoutSeconds: 5
+{{- if .Values.solr.resources }}
+      resources:
+{{ toYaml .Values.solr.resources | indent 8 }}
+{{- end  }}
+  zookeeperRef:
+    provided:
+      chroot: "/this/will/be/auto/created"
+      persistence:
+        spec:
+          storageClassName: "default"
+          resources:
+            requests:
+              storage: "{{ .Values.zookeeper.storage.size }}"
+      replicas: {{ .Values.replicas }}
+      zookeeperPodPolicy:
+{{- if .Values.zookeeper.resources }}
+        resources:
+{{ toYaml .Values.zookeeper.resources | indent 10 }}
+{{- end  }}
+  solrOpts: "-Dsolr.autoSoftCommit.maxTime=10000"
+  solrGCTune: "-XX:SurvivorRatio=4 -XX:TargetSurvivorRatio=90 -XX:MaxTenuringThreshold=8"
