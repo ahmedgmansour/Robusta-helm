@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: drupal
+  namespace: argocd
+  labels:
+spec:
+  project: robusta
+  source:
+     helm:
+       valueFiles:
+       - values.yaml  
+    repoURL: https://github.com/ahmedgmansour/Robusta-helm.git
+    targetRevision: main
+    path: robusta-dev/drupal/drupal
+    plugin:
+      name: argocd-vault-plugin    
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
