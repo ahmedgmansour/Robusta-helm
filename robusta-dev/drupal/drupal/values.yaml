@@ -36,7 +36,7 @@ drupal:
   ##
   imagePullPolicy: IfNotPresent
 
-  replicas: 1
+  replicas: 2
 
 
   # PHP configuration
@@ -577,7 +577,7 @@ azure:
 ## Configuration values for the MySQL dependency sub-chart
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/mysql/README.md
 mysql:
-  enabled: true
+  enabled: false
   image:
     tag: 8.0.29-debian-11-r3
   auth:
@@ -632,9 +632,9 @@ mysql:
 ## Configuration values for the PostgreSQL dependency sub-chart
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/postgresql/README.md
 postgresql:
-  enabled: false
-  image:
-    tag: 14.3.0-debian-11-r3
+  enabled: true
+  image: ahmedgmansour/postgres
+    tag: ""
   auth:
     enablePostgresUser: true
     postgresPassword: ""
@@ -643,7 +643,7 @@ postgresql:
     database: "wxt"
   primary:
     persistence:
-      enabled: true
+      enabled: false
       # storageClass: managed-premium
       size: 128Gi
     configuration: |-
@@ -684,7 +684,8 @@ proxysql:
 ## Configuration values for the Redis dependency sub-chart
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/redis/README.md
 redis:
-  enabled: false
+  image: ahmedgmansour/redis
+  enabled: true
   replica:
     enabled: false
     replicaCount: 0
