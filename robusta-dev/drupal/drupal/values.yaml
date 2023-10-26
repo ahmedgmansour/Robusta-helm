@@ -19,10 +19,10 @@ drupal:
   ## Drupal image version
   ## ref: https://hub.docker.com/drupalwxt/site-wxt/tags/
   ##
-  image: drupalwxt/site-wxt
+  image: ahmedgmansour/drupal
 
   ## Note that by default we use appVersion to get image tag
-  # tag: 5.0.0
+  tag: ""
 
   ## Optionally specify an array of imagePullSecrets.
   ## Secrets must be manually created in the namespace.
@@ -50,7 +50,7 @@ drupal:
 
   ## Application password
   ##
-  ## password: WxT2020
+   password: WxT2020
 
   ## Site configuration
   ##
