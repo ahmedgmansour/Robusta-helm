@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-deployment
+  name: nginx-deployment
   namespace: dev
   labels:
-    app: redis
+    app: nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redis
+      app: nginx
   template:
     metadata:
       labels:
-        app: redis
+        app: nginx
     spec:
       containers:
       - name: postgres
-        image: registry.eu-central-1.harbor.vodafone.com/vf-ie-apps-for-good-tozi/docker-vfie-tozi-local/redis:latest
+        image: nginx
         # command:
         # - sleep
         # - "3600"
