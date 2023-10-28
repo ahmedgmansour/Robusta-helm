@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: apps-network-policy
+  namespace: dev
+spec:
+  podSelector: {}
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 80
+        - protocol: TCP
+          port: 8080
+      from:
+        - podSelector:
+            matchLabels:
+              app: redis-ms
+        - podSelector:
+            matchLabels:
+              app: mysql-ms
+        - podSelector:
+            matchLabels:
+              app: drupal
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              app: redis-ms
+        - podSelector:
+            matchLabels:
+              app: drupal
+        - podSelector:
+            matchLabels:
+              app: mysql-ms
+    - ports:
+        - protocol: TCP
+          port: 80
+        - protocol: TCP
+          port: 3306
+        - protocol: TCP
+          port: 6379
+  policyTypes:
+    - Ingress
+    - Egress
